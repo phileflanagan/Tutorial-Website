@@ -1,0 +1,8 @@
+<div class="row">
+    <h3 class="text-center">List of Tutorials</h3>
+    <div class="col-md-4 card" ng-repeat="tut in tutList.tutorial">
+        <h3>{{ tut.name }}</h3>
+        <p>{{ tut.desc }}</p>
+        <button class="btn btn-default" ng-click="$parent.currTutorial = tut; $parent.selectedStep = 1; $parent.currStep = 1">View</button>
+    </div>
+</div>
