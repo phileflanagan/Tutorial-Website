@@ -6,66 +6,75 @@
     <!-- don"t forget to change the title ;) -->
     <title>How To App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- import Bootstrap, CSS, and Fonts -->
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    
+
     <!-- import JavaScript Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://code.angularjs.org/1.5.5/angular.min.js"></script>
-    <script src="https://code.angularjs.org/1.5.5/angular-route.min.js"></script>
-    <script src="https://code.angularjs.org/1.5.5/angular-resource.min.js"></script>
-    
+
     <!-- import Angular Components -->
-    <script  src="js/app.js"></script>
+    <script src="js/app.js"></script>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#/">Phil's How To</a>
-            </div>
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Phil's How To</a>
+                </div>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/">Home</a></li>
-                <li><a href="#/tutorial">Tutorial</a></li>
-            </ul>
-        </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Home</a></li>
+                </ul>
+            </div>
         </nav>
     </header>
 
-    <div class="container">
-        <div class="row text-center">
-            <h1 class="headline">Some Tutorial</h1>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="list-group">
-                    <a href="#/tutorial/1" class="list-group-item">
-                    <h4 class="list-group-item-heading">Step 1:</h4>
-                    <p class="list-group-item-text">Blurb about Step 1.</p>
-                    </a>
-                    
-                    <a href="#/tutorial/2" class="list-group-item">
-                    <h4 class="list-group-item-heading">Step 2:</h4>
-                    <p class="list-group-item-text">Blurb about Step 2.</p>
-                    </a>
-                    
-                    <a href="#/tutorial/3" class="list-group-item">
-                    <h4 class="list-group-item-heading">Step 3:</h4>
-                    <p class="list-group-item-text">Blurb about Step 3.</p>
-                    </a>
+    <div class="container" ng-controller="howToCtrl">
+        
+        <div ng-hide="currTutorial.length == 0"> <!-- hides if no tutorial selected -->
+            <div class="row text-center">
+                <h1 class="text-muted">{{ currTutorial.name }}</h1>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="list-group">
+                        <!-- list of steps -->
+                        <a href="#" class="list-group-item" ng-repeat="blurb in currTutorial.blurbs">
+                            <div ng-click="$parent.currStep = $index + 1">
+                            <h4 class="list-group-item-heading">Step {{ $index + 1 }}:</h4>
+                            <p class="list-group-item-text">{{ blurb }}</p>
+                            </div>
+                        </a>
+                        <a href="#" class="list-group-item" ng-click="currTutorial = ''">
+                            <small>Close</small>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="col-sm-9" id="tutorialView">
+                    <tut step="{{ currStep }}" tutorial="{{currTutorial.refpath}}"></tut>
                 </div>
             </div>
-            <div class="col-sm-9" id="tutorialView">
-                <div ng-view></div>
+            <hr />
+        </div> <!-- end of hide div -->
+
+
+        <div class="row">
+            <h3 class="text-center">List of Tutorials</h3>
+            <div class="col-md-4 card" ng-repeat="tut in tutList.tutorial">
+                <h3>{{ tut.name }}</h3>
+                <p>{{ tut.desc }}</p>
+                <button class="btn btn-default" ng-click="$parent.currTutorial = tut">View</button>
             </div>
         </div>
-    
-    </div>
+        
+    </div><!-- end of controller -->
+
 
     <!-- import My JavaScript-->
     <script src="js/index.js"></script>

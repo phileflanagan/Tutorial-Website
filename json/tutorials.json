@@ -1,0 +1,24 @@
+{
+    "tutorial": [
+        {
+            "name": "Hipster Tutorial",
+            "desc": "In this tutorial you will learn how to...",
+            "refpath": "firsttutorial",
+            "blurbs": {
+                "step1": "Yada yada step 1",
+                "step2": "blah blah step 2",
+                "step3": "something step 3"
+            }
+        },
+        {
+            "name": "Bacon Tutorial",
+            "desc": "Some other tutorial description",
+            "refpath": "anothertutorial",
+            "blurbs": {
+                "step1": "asdf asdf 1",
+                "step2": "lorem ipsum 2",
+                "step3": "foo bar 3",
+                "step4": "some other desc 4"
+            }
+        }]
+}
