@@ -15,6 +15,7 @@ howToApp.factory('tutorials', ['$http', function ($http) {
 
 // Controllers
 howToApp.controller('howToCtrl', ['$scope', 'tutorials', function ($scope, tutorials) {
+    $scope.selectedStep = 1;
     $scope.currTutorialRef = $scope.currTutorialRef || 'firsttutorial';
     $scope.currStep = $scope.currStep || '1';
     $scope.tutList = {};

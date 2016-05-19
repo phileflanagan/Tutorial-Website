@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    <div id="fullPageWrapper">
     <header>
         <nav class="navbar navbar-default">
             <div class="container">
@@ -34,7 +35,7 @@
         </nav>
     </header>
 
-    <div class="container" ng-controller="howToCtrl">
+    <div class="container" ng-controller="howToCtrl" ng-cloak>
         
         <div ng-hide="currTutorial.length == 0"> <!-- hides if no tutorial selected -->
             <div class="row text-center">
@@ -44,13 +45,13 @@
                 <div class="col-sm-3">
                     <div class="list-group">
                         <!-- list of steps -->
-                        <a href="#" class="list-group-item" ng-repeat="blurb in currTutorial.blurbs">
-                            <div ng-click="$parent.currStep = $index + 1">
+                        <a href="#" class="list-group-item" ng-repeat="blurb in currTutorial.blurbs" ng-class="{'active': selectedStep === $index + 1}">
+                            <div ng-click="$parent.currStep = $index + 1; $parent.selectedStep = $index + 1">
                             <h4 class="list-group-item-heading">Step {{ $index + 1 }}:</h4>
                             <p class="list-group-item-text">{{ blurb }}</p>
                             </div>
                         </a>
-                        <a href="#" class="list-group-item" ng-click="currTutorial = ''">
+                        <a href="#" class="list-group-item" ng-click="currTutorial = ''; selectedStep = 1; currStep = 1">
                             <small>Close</small>
                         </a>
 
@@ -69,13 +70,16 @@
             <div class="col-md-4 card" ng-repeat="tut in tutList.tutorial">
                 <h3>{{ tut.name }}</h3>
                 <p>{{ tut.desc }}</p>
-                <button class="btn btn-default" ng-click="$parent.currTutorial = tut">View</button>
+                <button class="btn btn-default" ng-click="$parent.currTutorial = tut; $parent.selectedStep = 1; $parent.currStep = 1">View</button>
             </div>
         </div>
         
     </div><!-- end of controller -->
 
-
+    <footer>
+        <p class="text-center text-muted">&copy; Copyright 2016 Phil Flanagan</p>
+    </footer>
+    </div>
     <!-- import My JavaScript-->
     <script src="js/index.js"></script>
 </body>
